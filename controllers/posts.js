@@ -50,6 +50,18 @@ export const createPost = async (req, res) => {
 
 export const updatePost = async (req, res) => {
   try {
+    const { id } = req.params;
+    const { author, title, content, cover } = req.body;
+    console.log(req.body, id);
+
+    const result = await query(
+      `UPDATE posts SET author=$1, title=$2, content=$3, cover=$4 WHERE id=$5 RETURNING *`,
+      [author, title, content, cover, id]
+    );
+
+    console.log(result);
+
+    res.status(200).send("Post updated successfully");
   } catch (error) {
     console.log(error);
     res.status(500).send("something went wrong");
