@@ -13,5 +13,5 @@ app.use(express.json());
 app.use("/posts", postsRouter);
 
 app.listen(PORT, () =>
-  console.log(`Express App is running on http://localhost:${PORT}`)
+  console.log(`Backend Server (powered by Express) is running on http://localhost:${PORT}`)
 );

@@ -11,6 +11,7 @@ const resource = '/posts';
 
 // Request handler to handle all requests
 const requestHandler = async (req, res) => {
+
   const { method, url } = req;
   if (url === resource) {
     if (method === 'GET') return await getPosts(req, res);
@@ -18,6 +19,7 @@ const requestHandler = async (req, res) => {
     else return returnErrorWithMessage(res, 405, 'Method Not Allowed');
   } 
   else if (regex(resource).test(url)) {
+    if (method === 'GET') return await getPostById(req, res);
     if (method === 'GET') return await getPostById(req, res);
     if (method === 'PUT') return await updatePostbyId(req, res);
     if (method === 'DELETE') return await deletePostbyId(req, res);
@@ -31,4 +33,4 @@ const server = http.createServer(requestHandler);
 // Set the port
 const port = 3000;
 // Start the server
-server.listen(port, () => console.log(`NodeJS Server is running at http://localhost:${port}`));
+server.listen(port, () => console.log(`Backend Server (powered by NodeJS not cors compatible, but works with Postman) \nis running on http://localhost:${port}`));
